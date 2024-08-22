@@ -1,0 +1,49 @@
+version: '3.4'
+
+services:
+  backend:
+    container_name: backend_container
+    build:
+      context: ./backend  # Asegúrate de que la ruta sea correcta
+    ports:
+      - "8080:8080"  # Puerto para el backend
+    environment:
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_NAME=iadb
+      - DB_USER=root
+      - DB_PASSWORD=lindura010
+    networks:
+      - my_net_inversor_argentino
+    depends_on:
+      - mysql
+    restart: always
+
+  frontend:
+    container_name: frontend_container
+    build:
+      context: ./frontend  # Asegúrate de que la ruta sea correcta
+    ports:
+      - "3000:80"  # Puerto para el frontend
+    networks:
+      - my_net
+    depends_on:
+      - backend
+    restart: always
+
+  mysql:
+    container_name: mysql_container
+    image: mysql:8.0  # Usa la versión de MySQL que necesitas
+    ports:
+      - "13307:3306"  # Puerto para MySQL
+    environment:
+      - MYSQL_ROOT_PASSWORD=lindura010
+      - MYSQL_DATABASE=iadb
+      - MYSQL_PASSWORD=lindura010
+    networks:
+      - my_net_inversor_argentino
+    restart: always
+
+networks:
+  my_net:
+    driver: bridge

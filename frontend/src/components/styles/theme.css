@@ -1,0 +1,70 @@
+:root {
+  --main: white;
+  --header: white;
+  --font: black;
+  --button: #032248;
+  --fontButton: white;
+  --fontNav: black;
+  --border:#373737;
+
+}
+
+[data-theme="dark"] {
+  --main: #161616;
+  --header: #27234a;
+  --font: white;
+  --button: black;
+  --fontButton: white;
+  --fontNav: #FCDDB7;
+  --border:#373737;
+}
+
+body {
+  background-color: var(--main);
+  color: var(--font);
+}
+
+.navbar {
+  background-color: var(--header);
+}
+
+.button1 {
+  background-color: var(--button);
+  color: var(--fontButton);
+}
+
+.button1:hover {
+  background-color: #1565c0;
+}
+
+.text {
+  color: var(--fontNav);
+}
+
+.footer {
+  color: var(--fontNav);
+  background-color: var(--header);
+}
+
+.fondo{
+  background-color: var(--main);
+}
+
+.border{
+  border: 1px solid var(--fontNav);
+  border-radius: 5px;
+  padding:5px;
+  list-style: none;
+}
+.listaSide{
+  right:0;
+  width:20%;
+}
+
+.topBorder{
+  border-top: 1px solid var(--fontNav);
+}
+
+.labeles{
+  font-family: "'Roboto', sans-serif";
+}

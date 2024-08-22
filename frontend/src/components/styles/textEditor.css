@@ -1,0 +1,20 @@
+/* Global styles for TinyMCE content */
+.mce-content-body img {
+  max-width: 100%;
+  height: auto;
+}
+
+.mce-content-body {
+  overflow-wrap: break-word;
+}
+
+@media (min-width: 600px) {
+  .mce-content-body img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .mce-content-body {
+    font-size: 14px; /* Adjust font size for mobile */
+  }
+}
