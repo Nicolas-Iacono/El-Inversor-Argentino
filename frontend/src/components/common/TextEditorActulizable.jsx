@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import ContainerFullWidth from './ContainerFullWidth';
 
 const TextEditorActualizable = ({ initialContent, onContentChange }) => {
+  const editorRef = useRef(null);
+
+  useEffect(() => {
+    if (editorRef.current) {
+      editorRef.current.setContent(initialContent);
+    }
+  }, [initialContent]);
+
   return (
     <ContainerFullWidth sx={{ height: "400px" }}>
       <Editor
         apiKey="yk10ygeb6q71ucxlc2kqvhzpliekkdjmjgw8bxrxbxmvbl6y"
-        initialValue={initialContent}
+        onInit={(evt, editor) => editorRef.current = editor}
+        initialValue={initialContent} // Se inicializa solo una vez
         init={{
           width: "100%",
           height: 500,

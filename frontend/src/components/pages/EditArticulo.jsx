@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import {
@@ -16,6 +16,7 @@ import { UseAsideContextGlobal } from "../context/AsideContext";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import API_BASE_URL from "../api/config";
+
 const EditarArticulo = () => {
   const [mobile, setMobile] = useState(false);
   const [visible, setVisible] = useState(true);
@@ -26,12 +27,12 @@ const EditarArticulo = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [idArt, setIdArt] = useState(0);
   const [article, setArticle] = useState({
-    
     title: "",
     subtitle: "",
     image: "",
     paragraph: "",
   });
+  const [editorContent, setEditorContent] = useState("");
 
   const visibleInputsClick = () => {
     setVisible(!visible);
@@ -41,9 +42,9 @@ const EditarArticulo = () => {
     axios
       .get(`${API_BASE_URL}/api/articulos/${id}`)
       .then((response) => {
-        setIdArt(response.data.id)
-        console.log(idArt)
+        setIdArt(response.data.id);
         setArticle(response.data);
+        setEditorContent(response.data.paragraph); // Establece el contenido inicial del editor
       })
       .catch((error) => console.error("Error fetching article:", error));
   }, [id]);
@@ -66,27 +67,27 @@ const EditarArticulo = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-        const data = article;
-        const authorization = localStorage.getItem('token');
-        if(!authorization) {
-          console.log("Token not found");
-          return;
-        }
-        const config={
-          method: 'put',
-          url:`${API_BASE_URL}/api/articulos/update/${article.id}`,
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${authorization}`
-          },
-          data: data
-        };
+      const data = article;
+      const authorization = localStorage.getItem("token");
+      if (!authorization) {
+        console.log("Token not found");
+        return;
+      }
+      const config = {
+        method: "put",
+        url: `${API_BASE_URL}/api/articulos/update/${article.id}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authorization}`,
+        },
+        data: data,
+      };
 
-        const response = await axios.request(config)
-        console.log(JSON.stringify(response.data));
-        
+      const response = await axios.request(config);
+      console.log(JSON.stringify(response.data));
+
       alert("Artículo actualizado exitosamente");
-      navigate(`/api/articulos/${idArt}`)
+      navigate(`/api/articulos/${idArt}`);
     } catch (error) {
       console.error("Error updating article:", error);
     }
@@ -159,8 +160,7 @@ const EditarArticulo = () => {
             sx={{
               display: "flex",
               justifyContent: "space-between",
-              alignItems: "center"
-              
+              alignItems: "center",
             }}
           >
             <Grid
@@ -203,7 +203,7 @@ const EditarArticulo = () => {
         )}
 
         <TextEditorActualizable
-          initialContent={article.paragraph}
+          initialContent={editorContent} // Utiliza editorContent que se establece una vez cargado
           onContentChange={handleEditorChange}
         />
       </form>
