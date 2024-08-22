@@ -27,7 +27,7 @@ export const AsideAdmin = () => {
 
   return (
     <ContainerFullWidth sx={{  height: "90vh", display: "flex" }}>
-    <Grid item sx={{ width: '5%', height: "100%", display: "flex", alignItems: "center", flexDirection: "column", gap: '30px', borderRight:"1px solid grey", justifyContent:"center", gap:"50px"}}>
+    <Grid item sx={{ width: '5%', height: "100%", display: "flex", alignItems: "center", flexDirection: "column", borderRight:"1px solid grey", justifyContent:"center", gap:"50px"}}>
       <IconButton onClick={handleClickNuevo}>
          <AddRoundedIcon  sx={{
          color: theme === 'dark' ? "white" : "black" 

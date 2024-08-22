@@ -35,7 +35,7 @@ export const CardCarrusel =  ({ articulo }) => {
             <Box sx={{ width:"70%",borderRadius:"20px"}}>
               <img src={articulo.image} alt="" width="100%" height="100%" style={{borderRadius:"20px"}} />
             </Box>
-            <Box sx={{backgroundColor:"rgba(232, 232, 239, 0.3)", width:{sm:"32%", xs:"11%"}, padding:"20px",bottom:"5px",borderRadius:"20px 0 0 20px", position:"absolute",height:"100%", left:"0",zIndex:"-1", bottom:"0"}}>
+            <Box sx={{backgroundColor:"rgba(232, 232, 239, 0.3)", width:{sm:"32%", xs:"11%"}, padding:"20px",borderRadius:"20px 0 0 20px", position:"absolute",height:"100%", left:"0",zIndex:"-1", bottom:"0"}}>
               <Box sx={{ width:"100%", borderRadius:"10px 0 0 10px", borderLeft:"20px solid #032248"}}>
               <TitleCard>{articulo.title}</TitleCard>
               </Box>
